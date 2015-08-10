@@ -1,0 +1,71 @@
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<style>
+		label{
+			float: left;
+			text-align: right;
+			margin-right: 10px;
+			width: 70px;
+		}
+		ul{
+			list-style: none;
+		}
+		li{
+			margin-bottom: 10px;
+		}
+	</style>
+	<script>
+		function validate_required(field,alerttxt){
+			with (field){
+		  		if (value==null || value==""){
+		  			alert(alerttxt);
+		  			return false;
+		  		}
+		  		else {
+		  			return true
+		  		}
+		 	 }
+		}
+		function validate_form(form){
+			with(form){
+				if(validate_required(name, "请输入预约人！") == false){
+					name.focus();
+					return false;
+				}
+				if(validate_required(time, "请输入预约时间！") == false){
+					time.focus();
+					return false;
+				}
+				if(validate_required(intro, "请输入简要说明！") == false){
+					intro.focus();
+					return false;
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<h2>预约单</h2>
+	<form name="reserve" action="/show" method="get" onsubmit="return validate_form(this)">
+	<ul>
+		<li><label>预约人:</label><input type="text" name="name"></li>
+		<li><label>科室:</label>
+		<select name="dep">
+			<option value="IT科">IT科</option>
+			<option value="PLM开发">PLM开发</option>
+			<option value="PLM研发BP">PLM研发BP</option>
+			<option value="PLM标准化">PLM标准化</option>
+		</select></li>
+		<li><label>时间:</label><input type="text" name="time" class="tcal" value="" />
+		<select name="time">
+			<option value="上午">上午</option>
+			<option value="下午">下午</option>
+		</select></li>
+		<li><label>简要说明:</label><input type="text" name="intro"><br/></li>
+		<li><input type="reset" name="reset" value="取消"><input type="submit" name="submit" value="提交"></li>
+	</ul>
+	<hr/><a href="/detail">查看列表</a>
+	</form>
+</body>
+</html>
